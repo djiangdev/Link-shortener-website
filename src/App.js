@@ -4,7 +4,8 @@ import Clipboard from 'react-clipboard.js'
 
 export class App extends Component {
   static defaultProps = {
-    access_token: 'bd6178d501f8baaf58616c672ab6416105e158d4'
+    access_token: 'bd6178d501f8baaf58616c672ab6416105e158d4',
+    copy_text: 'Copy to clipboard'
   }
 
   constructor (props) {
@@ -17,6 +18,7 @@ export class App extends Component {
     this.handleSubmit = this.handleSubmit.bind(this)
     this.getShortenUrl = this.getShortenUrl.bind(this)
     this.onCopySuccess = this.onCopySuccess.bind(this)
+    this.resetCopyButton = this.resetCopyButton.bind(this)
   }
 
   async getShortenUrl (long_url) {
@@ -45,6 +47,10 @@ export class App extends Component {
     this.setState({ copy_text: 'Copied' })
   }
 
+  resetCopyButton () {
+    this.setState({ copy_text: this.props.copy_text })
+  }
+
   render () {
     return (
       <div className='App'>
@@ -58,7 +64,11 @@ export class App extends Component {
               required
               placeholder='Enter your long url...'
             />
-            <button type='submit' className='App-btn'>
+            <button
+              type='submit'
+              className='App-btn'
+              onClick={this.resetCopyButton}
+            >
               Shorten
             </button>
           </form>
