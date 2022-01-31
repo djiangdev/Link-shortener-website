@@ -10,7 +10,8 @@ export class App extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      short_url: ''
+      short_url: '',
+      copy_text: 'Copy to clipboard'
     }
 
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -41,7 +42,7 @@ export class App extends Component {
   }
 
   onCopySuccess () {
-    alert('Copied this url: ' + this.state.short_url)
+    this.setState({ copy_text: 'Copied' })
   }
 
   render () {
@@ -69,7 +70,7 @@ export class App extends Component {
                 data-clipboard-text={this.state.short_url}
                 onSuccess={this.onCopySuccess}
               >
-                Copy to clipboard
+                {this.state.copy_text}
               </Clipboard>
             </div>
           )}
