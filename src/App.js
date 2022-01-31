@@ -13,7 +13,7 @@ export class App extends Component {
     super(props)
     this.state = {
       short_url: '',
-      copy_text: 'Copy to clipboard'
+      copy_text: ''
     }
 
     this.handleSubmit = this.handleSubmit.bind(this)
