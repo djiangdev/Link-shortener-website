@@ -69,7 +69,7 @@ export class App extends Component {
                 data-clipboard-text={this.state.short_url}
                 onSuccess={this.onCopySuccess}
               >
-                Copy this URL
+                Copy to clipboard
               </Clipboard>
             </div>
           )}
