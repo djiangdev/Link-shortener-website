@@ -18,7 +18,6 @@ export class App extends Component {
     this.handleSubmit = this.handleSubmit.bind(this)
     this.getShortenUrl = this.getShortenUrl.bind(this)
     this.onCopySuccess = this.onCopySuccess.bind(this)
-    this.resetCopyButton = this.resetCopyButton.bind(this)
   }
 
   async getShortenUrl (long_url) {
@@ -40,15 +39,14 @@ export class App extends Component {
   async handleSubmit (e) {
     e.preventDefault()
     const res = await this.getShortenUrl(e.target[0].value)
-    this.setState({ short_url: res.link })
+    this.setState({
+      short_url: res.link,
+      copy_text: this.props.copy_text
+    })
   }
 
   onCopySuccess () {
     this.setState({ copy_text: 'Copied' })
-  }
-
-  resetCopyButton () {
-    this.setState({ copy_text: this.props.copy_text })
   }
 
   render () {
@@ -64,11 +62,7 @@ export class App extends Component {
               required
               placeholder='Enter your long url...'
             />
-            <button
-              type='submit'
-              className='App-btn'
-              onClick={this.resetCopyButton}
-            >
+            <button type='submit' className='App-btn'>
               Shorten
             </button>
           </form>
