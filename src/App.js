@@ -4,6 +4,7 @@ import Clipboard from 'react-clipboard.js'
 
 export class App extends Component {
   static defaultProps = {
+    bitly_host: 'https://api-ssl.bitly.com',
     access_token: 'bd6178d501f8baaf58616c672ab6416105e158d4',
     copy_text: 'Copy to clipboard'
   }
@@ -21,7 +22,7 @@ export class App extends Component {
   }
 
   async getShortenUrl (long_url) {
-    const response = await fetch('https://api-ssl.bitly.com/v4/shorten', {
+    const response = await fetch(this.props.bitly_host + '/v4/shorten', {
       method: 'post',
       headers: {
         'Content-Type': 'application/json',
@@ -31,9 +32,7 @@ export class App extends Component {
         long_url: long_url
       })
     })
-
-    const data = await response.json()
-    return data
+    return await response.json()
   }
 
   async handleSubmit (e) {
